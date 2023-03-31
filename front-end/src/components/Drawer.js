@@ -19,6 +19,13 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
+import HomeIcon from '@mui/icons-material/Home';
+import GroupIcon from '@mui/icons-material/Group';
+import ArticleIcon from '@mui/icons-material/Article';
+import { Link ,useNavigate   } from "react-router-dom";
+import LogoutIcon from '@mui/icons-material/Logout';
+import AddCircleIcon from '@mui/icons-material/AddCircle';
+
 import {
  
     Collapse,
@@ -90,7 +97,14 @@ const Drawer1 = () => {
     const handleDrawerClose = () => {
       setOpen(false);
     };
-  
+    const navigate = useNavigate()
+    const logout =()=>
+    {
+    
+    
+        localStorage.removeItem('token');
+        navigate('/')
+    }
   return (
     <div>
 
@@ -109,14 +123,15 @@ const Drawer1 = () => {
           >
             <MenuIcon />
           </IconButton>
-          <div style={{marginLeft:"1180px"}}>
+          <div style={{}}>
           <Typography variant="h6" noWrap component="div" style={{float:""}}>
-            Persistent drawer
+           
             {/* <i style={{color:"#9A9A9A "}} className="fa fa-facebook-square" />
             <i style={{color:"#9A9A9A "}} className="fa fa-instagram" />
            
             <i style={{color:"#9A9A9A "}} className="fa fa-shopping-cart"></i> */}
-            <Nav navbar style={{flexDirection:"row",justifyContent:"space-evenly"}}>
+            <div style={{display:"flex",flexDirection:"row",justifyContent:"space-around"}}>
+            <Nav navbar style={{marginLeft:"900px",flexDirection:"row",justifyContent:"space-around"}}>
             <NavItem>
             <NavLink
               data-placement="bottom"
@@ -135,7 +150,7 @@ const Drawer1 = () => {
               target="_blank"
               title="Follow us on Instagram"
             >
-              <i style={{color:"#9A9A9A "}} className="fa fa-instagram" />
+              <i style={{color:"#9A9A9A ",marginLeft:"10px"}} className="fa fa-instagram" />
               <p className="d-lg-none">Instagram</p>
             </NavLink>
             </NavItem>
@@ -146,15 +161,22 @@ const Drawer1 = () => {
               target="_blank"
               title="Star on GitHub"
             >
-              <i style={{color:"#9A9A9A "}} className="fa fa-shopping-cart" />
+              <i style={{color:"#9A9A9A ",marginLeft:"10px"}} className="fa fa-shopping-cart" />
               <p className="d-lg-none">Panier</p>
+
             </NavLink>
             </NavItem>
+          
+             
+
             </Nav>
+            <LogoutIcon onClick={()=>logout()} style={{color:"#9A9A9A",marginLeft:"300px",float:"left"}}/>
+</div>
           </Typography>
           </div>
         
         </Toolbar>
+        
       </AppBar>
       <Drawer
         sx={{
@@ -176,11 +198,12 @@ const Drawer1 = () => {
         </DrawerHeader>
         <Divider />
         <List>
-          {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
+          {['Tableau de bord'].map((text, index) => (
             <ListItem key={text} disablePadding>
               <ListItemButton>
                 <ListItemIcon>
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                <Link to="/admin"><HomeIcon /></Link>
+                 
                 </ListItemIcon>
                 <ListItemText primary={text} />
               </ListItemButton>
@@ -189,11 +212,11 @@ const Drawer1 = () => {
         </List>
         <Divider />
         <List>
-          {['All mail', 'Trash', 'Spam'].map((text, index) => (
+          {['Utilisateurs', 'Articles'].map((text, index) => (
             <ListItem key={text} disablePadding>
               <ListItemButton>
                 <ListItemIcon>
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                  {index % 2 === 0 ? <Link to="/list"><GroupIcon /></Link> : <Link to="/listProduct"><ArticleIcon /></Link>}
                 </ListItemIcon>
                 <ListItemText primary={text} />
               </ListItemButton>

@@ -29,7 +29,7 @@ console.log(token)
 //   };
     const fetchData = async () =>
     {
-        await axios.get("http://localhost:5009/api/profile",{headers:{Authorization:token}})
+        await axios.get("http://localhost:5011/api/profile",{headers:{Authorization:token}})
         .then((response)=>{
             dispatch(setUser(response.data.currentUser))
             console.log(response);

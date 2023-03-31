@@ -14,6 +14,7 @@ userRoutes.get('/profile',isAuthenticate,(req,res)=>
     res.status(200).json({msg:"user logged in" ,currentUser})
 })
 userRoutes.put('/update/:id',isAuthenticate,updateUser)
-userRoutes.get('/list',isAuthenticate,listUser)
+userRoutes.get('/list',listUser)
 userRoutes.delete('/delete/:id',isAuthenticate,deleteUser)
+
 module.exports = userRoutes;

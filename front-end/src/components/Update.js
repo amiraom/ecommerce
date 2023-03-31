@@ -11,7 +11,7 @@ console.log(User._id);
 const token =localStorage.getItem('token');
 const handelUpdate = async () =>
 {
-    await axios.put(`http://localhost:5009/api/update/${User._id}`,{...value},{headers:{Authorization:token}})
+    await axios.put(`http://localhost:5011/api/update/${User._id}`,{...value},{headers:{Authorization:token}})
     .then((response)=>{
         console.log(response.data);
     }).catch((err)=>{console.log(err);})

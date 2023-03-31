@@ -43,6 +43,12 @@ import Login from "components/Login";
 
 import { Provider } from 'react-redux'
 import store from "store/store";
+import AjoutArticle from "./components/AjoutArticle";
+import ListProduit from "components/ListProduit";
+import AdminRoute from "privateRoute/AdminRoute";
+import Admin from "Pages/AdminDashBoard/Admin";
+import User from "Pages/UserDashBoard/User";
+
 // others
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
@@ -51,23 +57,8 @@ root.render(
   <Provider store={store}>
   <BrowserRouter>
     <Routes>
-      <Route path="/index" element ={<Index/>}  />
-      <Route
-        path="/nucleo-icons"
-        render={(props) => <NucleoIcons {...props} />}
-      />
-      <Route
-        path="/landing-page"
-        render={(props) => <LandingPage {...props} />}
-      />
-      <Route
-        path="/profile-page"
-        render={(props) => <ProfilePage {...props} />}
-      />
-      <Route
-        path="/register-page"
-        render={(props) => <RegisterPage {...props} />}
-      />
+      <Route path="/" element ={<Index/>}  />
+     
   
 
 {/* 
@@ -82,12 +73,16 @@ root.render(
           }
         /> */}
     </Routes>
-
+{/* 
 
          
     <Routes>
       <Route path='/login/register' element ={<Register/>} />
       <Route path='/login' element ={<Login/>} />
+      <Route path='/addProduct' element ={<AjoutArticle/>} />
+      <Route path='/listProduct' element ={<ListProduit/>} />
+
+      
       <Route element={<UserRoute/>} >
       
       <Route path='/account' element ={<Profile/>} />
@@ -95,6 +90,27 @@ root.render(
       <Route path='/list' element={<List/>}/>
      
     </Route>
+    </Routes> */}
+
+
+
+    <Routes>
+    <Route path='/addProduct' element ={<AjoutArticle/>} />
+      <Route path='/listProduct' element ={<ListProduit/>} />
+      <Route path='/login/register' element ={<Register/>} />
+      <Route path='/login' element ={<Login/>} />
+      
+      <Route element={<UserRoute/>}>
+        <Route path="/user" element={<User/>}/>
+      <Route path='/account' element ={<Profile/>} />
+    
+      </Route>
+      <Route element={<AdminRoute/>}> 
+      <Route path="/admin" element={<Admin/>}/>
+      <Route path='/update/:id' element={<Update/>} />
+      <Route path='/list' element={<List/>}/>
+      </Route>
+   
     </Routes>
   </BrowserRouter>
   </Provider>

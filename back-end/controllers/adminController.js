@@ -2,9 +2,9 @@ const produitSchema =require('../model/produit');
 //ajouter un produit
 exports.addProduct =async(req,res)=>{
     try{
-        const {designation,image,prix,quantite}= req.body;
- 
-        const newProduct = await new produitSchema (req.body);
+        const {designation,prix,quantite}= req.body;
+        const {file} =req;
+        const newProduct = await new produitSchema ({designation,prix,quantite,image:(file && file.path )|| null,});
    
         newProduct.save();
         res.status(200).json({msg:'product created with sucess',newProduct})

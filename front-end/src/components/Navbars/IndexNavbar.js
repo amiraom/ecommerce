@@ -141,7 +141,7 @@ function IndexNavbar() {
                 href="https://demos.creative-tim.com/paper-kit-react/#/documentation?ref=pkr-index-navbar"
                 target="_blank"
               >
-                <Link to="/login" style={{color:"white",textDecoration:"none"}}>Se connecter</Link>
+                <Link to="/login" style={{color:"white",textDecoration:"none",fontStyle:"bold"}}>Se connecter</Link>
                 {/* <i className="" />Se connecter */}
               </NavLink>
             </NavItem>

@@ -65,7 +65,7 @@ function DemoFooter() {
               <i className="fa fa-heart heart" /> ALL RIGHTS RESERVED
             </span>
           </div>
-        </Row>
+      </Row>
       </Container>
     </footer>
   );

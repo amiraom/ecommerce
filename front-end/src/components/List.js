@@ -17,7 +17,7 @@ const List = () => {
     const token =localStorage.getItem('token');
     const getData = async()=>
     {
-        await axios.get("http://localhost:5000/api/list",{headers:{Authorization:token}})
+        await axios.get("http://localhost:5011/api/list",{headers:{Authorization:token}})
         .then((response)=>{
             setList(response.data.listUser)
             console.log(response);
@@ -29,9 +29,11 @@ const List = () => {
     useEffect(()=>{getData()},[list])
     // console.log(list);
 
+
+    
     const deleteUser= async(id)=>
     {
-        await axios.delete(`http://localhost:5009/api/delete/${id}`,{headers:{Authorization:token}})
+        await axios.delete(`http://localhost:5011/api/delete/${id}`,{headers:{Authorization:token}})
         .then((response)=>
         {
             console.log(response);

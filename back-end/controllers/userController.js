@@ -30,7 +30,7 @@ exports.login = async(req,res)=>
 {
 try{
     const {email,password}= req.body;
-    const exist= await userSchema.findOne({email});
+    const exist= await userSchema.findOne({email})
     if(!exist){
         return res.status(404).json({msg:"wrong address email or passwor "})
     }
@@ -41,7 +41,8 @@ try{
  //token
  const payload = {id:exist._id};
  const token =jwt.sign(payload,process.env.privateKey);
- res.status(200).json({msg:"you did it ",token})
+
+ res.status(200).json({msg:"you did it ",exist,token})
 }
 catch(error){
 console.log(error);

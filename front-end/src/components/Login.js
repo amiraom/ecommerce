@@ -1,21 +1,3 @@
-/*!
-
-=========================================================
-* Paper Kit React - v1.3.1
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/paper-kit-react
-
-* Copyright 2022 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://github.com/creativetimofficial/paper-kit-react/blob/main/LICENSE.md)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
 import React , { useState }   from "react";
 import axios from "axios";
 // nodejs library that concatenates strings
@@ -23,7 +5,6 @@ import classnames from "classnames";
 import {useSelector}  from 'react-redux'
 import { selectCurrentToken} from "../store/authSlice"
 import jwtDecode from 'jwt-decode'
-
 import {
   Checkbox,
   Grid,
@@ -32,10 +13,8 @@ import {
   Paper,
   Button
 } from '@material-ui/core';
-
 // reactstrap components
 import {
- 
   Collapse,
   NavbarBrand,
   Navbar,
@@ -48,46 +27,40 @@ import { Link ,useNavigate   } from "react-router-dom";
 import Header from "./Header";
 import DemoFooter from "./Footers/DemoFooter";
 import useAuth from "./useAuth"
+import { setAuthentification } from "helpers/auth";
+import { isAuthenticated } from "helpers/auth";
+
 
 function Login() {
 
-  const [values,setValues]=useState({email:"",password:""});
-  const navigate =useNavigate();
-  const {surname,status,isAdmin,isUser,role} = useAuth()
-   
-const handelSubmit = async (event) =>
-{
-  event.preventDefault();
-  await axios.post("http://localhost:5009/api/login",{...values},{withCredentials:true}).then((response)=>{
-    //   console.log(response);
-      localStorage.setItem('token',response.data.token)
-    //  console.log(response.data);
-if(status=="user"){  
-        navigate('/account')
-        console.log(status)
-        console.log(isAdmin)
-        console.log(isUser)
-        console.log(role)
-        console.log(surname)
+    const [values,setValues]=useState({email:"",password:""});
+    const navigate =useNavigate();
+    const {surname,status,isAdmin,isUser,role} = useAuth()
+     
+  const handelSubmit = async (event) =>
+  {
+    event.preventDefault();
+    await axios.post("http://localhost:5011/api/login",{...values},{withCredentials:true}).then((response)=>{
+    
+        setAuthentification(response.data.token,response.data.exist);
+       
+          if(isAuthenticated() && isAuthenticated().role ==='admin'){
+            console.log('redirect to admin');
+            navigate('/admin')
+          }else{
+            console.log('redirect to userProfile');
+            navigate('/user')
+          }
+  
+    }).catch((error=>{console.log('error');
+    }))
+  }
 
-}
-else {
-    navigate('/list')
-      console.log(status)
-      console.log(isAdmin)
-      console.log(isUser)
-      console.log(role)
-      console.log(response.data)
 
-}
-
-  }).catch((error=>{console.log('error');
-  }))
-}
  
   return (
     <>
-   <Header/>
+  
 
    <div>
 <div className="row d-flex justify-content-center" style={{marginTop:"50px"}}>
