@@ -13,8 +13,8 @@ userRoutes.get('/profile',isAuthenticate,(req,res)=>
     const currentUser = req.user
     res.status(200).json({msg:"user logged in" ,currentUser})
 })
-userRoutes.put('/update/:id',isAuthenticate,updateUser)
+userRoutes.put('/update/:id',updateUser)
 userRoutes.get('/list',listUser)
-userRoutes.delete('/delete/:id',isAuthenticate,deleteUser)
+userRoutes.delete('/delete/:id',deleteUser)
 
 module.exports = userRoutes;

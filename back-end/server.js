@@ -11,14 +11,10 @@ const orderRouter = require ('./routes/orderRoute');
 const { notFound, errorHandler } = require('./middelware/Errors');
 const { config } = require('dotenv');
 config();
+app.use( '/src/public',express.static('public'));
 
 app.use(express.json());
-
-
 app.use(cors({ origin:"http://localhost:3004",credentials:true}))
-
-
-app.use(express.static('public'));
 
 app.use('/api',userRouter)
 app.use('/api',productRouter)
@@ -30,13 +26,5 @@ app.use(errorHandler)
 // app.use(express.static('/public'));
 // app.use(express.static(path.join(__dirname, '/public')))
 
-
-
-
-
 app.listen(port,(err)=>{
 err ? console.log(err): console.log(`running server in ${port}`)})
-
-
-
-

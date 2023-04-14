@@ -48,12 +48,17 @@ import ListProduit from "components/ListProduit";
 import AdminRoute from "privateRoute/AdminRoute";
 import Admin from "Pages/AdminDashBoard/Admin";
 import User from "Pages/UserDashBoard/User";
+import { Edit } from "components/Edit";
+import Ordres from "components/Ordres";
+import { CartProvider } from "CartContext";
+import Cart from './Cart';
 
 // others
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
+  <CartProvider>
   <Provider store={store}>
   <BrowserRouter>
     <Routes>
@@ -98,20 +103,25 @@ root.render(
     <Route path='/addProduct' element ={<AjoutArticle/>} />
       <Route path='/listProduct' element ={<ListProduit/>} />
       <Route path='/login/register' element ={<Register/>} />
+      <Route path='/cart' element ={<Cart/>} />
+
       <Route path='/login' element ={<Login/>} />
-      
       <Route element={<UserRoute/>}>
         <Route path="/user" element={<User/>}/>
       <Route path='/account' element ={<Profile/>} />
     
+          
       </Route>
       <Route element={<AdminRoute/>}> 
       <Route path="/admin" element={<Admin/>}/>
       <Route path='/update/:id' element={<Update/>} />
       <Route path='/list' element={<List/>}/>
+      <Route path ='edit' element={<Edit/>}></Route>
+      <Route path='/listOrdre' element={<Ordres/>}></Route>
       </Route>
    
     </Routes>
   </BrowserRouter>
   </Provider>
+  </CartProvider>
 );

@@ -14,69 +14,76 @@ import {
 } from "reactstrap";
 import DemoFooter from './Footers/DemoFooter';
 
-const List = () => {
+const Ordres = () => {
 
     const [list,setList]=useState([]);
     
-    const token =localStorage.getItem('token');
+   
     const navigate = useNavigate()
     const getData = async()=>
     {
-        await axios.get("http://localhost:5011/api/list",{headers:{Authorization:token}})
+        await axios.get("http://localhost:5011/api/listOrder")
         .then((response)=>{
-            setList(response.data.listUser)
+            setList(response.data.orders)   
             console.log(response);
-            console.log(response.data);
         })
            .catch((err)=>console.log(err))
     }
   
     useEffect(()=>{getData()},[list])
-    console.log(list);
+    console.log(list[0]
+        );
 
 
     
-    const deleteUser= async(id)=>
-    {
+    // const deleteUser= async(id)=>
+    // {
 
-      // await axios.delete(`http://localhost:5011/api/delete/${id}`,{headers:{Authorization:token}})
+    //   // await axios.delete(`http://localhost:5011/api/delete/${id}`,{headers:{Authorization:token}})
 
-        await axios.delete(`http://localhost:5011/api/delete/${id}`)
-        .then((response)=>
-        {
-            console.log(response);
-            console.log("deleted")
-        }).catch((err)=>
-        console.log(err))
+    //     await axios.delete(`http://localhost:5011/api/delete/${id}`)
+    //     .then((response)=>
+    //     {
+    //         console.log(response);
+    //         console.log("deleted")
+    //     }).catch((err)=>
+    //     console.log(err))
 
-    }
+    // }
  
   return (
     <div>
       <Header/>
       <div style={{marginLeft:"300px",marginTop:"50px",marginBottom:"400px"}}>
-    <h3>User List</h3>
+    <h3>Ordre List</h3>
   
     <Table striped bordered hover variant="dark">
       <thead>
         <tr>
         
-          <th>SurName</th>
-          <th>Name</th>
-          <th>Email</th>
+          <th>UserName</th>
+          <th>Name product</th>
+          <th>Quantity</th>
           
         </tr>
       </thead>
       <tbody>
       {list.map((elem) => (<tr>
-        <td>{elem.surname} 
+        <td>{elem.orderItems[0].price}</td>
+
+        <td>{elem.createdAt
+} 
 
         </td>
-        <td>{elem.name} 
+        <td>{elem.isPaid} 
 
 </td>
-        <td>{elem.email}</td>
-        <td>  <Button
+        <td>{elem.totalPrice}</td>
+        <td>{elem.paymentMethod}</td>
+
+        
+        
+        {/* <td>  <Button
                   className="btn-round mr-1"
                   color="warning"
                   outline
@@ -88,8 +95,8 @@ const List = () => {
                     pathname:'/update',
                     state:{ elem }
                   }}></Link>
-                  </td>
-        <td>
+                  </td> */}
+        {/* <td>
 
         <Button
                   color="danger"
@@ -100,7 +107,7 @@ const List = () => {
                 >
                  Supprimer
                 </Button>
-          </td>
+          </td> */}
          </tr>
             ))}
       </tbody>
@@ -112,4 +119,4 @@ const List = () => {
   )
 }
 
-export default List
+export default Ordres

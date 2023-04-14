@@ -7,7 +7,7 @@ const {notFound ,errorHandler} = require('../middelware/Errors');
 const productRoutes =express.Router();
 const multer = require ('multer');
 const storage = multer.diskStorage({destination: (req,file,cb)=>{
-    cb(null,'./public');
+    cb(null,'../front-end/public');
 },
 filename:(req,file,cb)=> {
     const fileName = `${Date.now()}_${file.originalname.replace(/\s+/g,'-')}`;

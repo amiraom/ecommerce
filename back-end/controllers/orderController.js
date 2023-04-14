@@ -73,7 +73,9 @@ exports.getMyOrders =async(req,res)=>{
 }
 exports.getOrders = async (req, res) => {
 	const orders = await Order.find({}).populate('user', 'id name')
-	res.json(orders)
+
+	res.status(200).json({msg:"liste des ordres",orders})
+
 }
 
 

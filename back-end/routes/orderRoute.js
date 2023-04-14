@@ -13,7 +13,7 @@ orderRoutes.post('/addOrder',isAuthenticate,addOrderItems);
 orderRoutes.get('/order/:id',isAuthenticate,getOrderById);
 orderRoutes.get('/myorders',isAuthenticate,getMyOrders);
 
-orderRoutes.get('/listOrder',isAuthenticate,getOrders);
+orderRoutes.get('/listOrder',getOrders);
 orderRoutes.put('/:id/pay',isAuthenticate,updateOrderToPaid);
 
 module.exports = orderRoutes;

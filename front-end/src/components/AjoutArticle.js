@@ -1,3 +1,4 @@
+
 import React , { useState }   from "react";
 import axios from "axios";
 // nodejs library that concatenates strings
@@ -19,6 +20,7 @@ import {
 import { Link ,useNavigate   } from "react-router-dom";
 import Header from "./Header";
 import {Formik} from 'formik';
+import DemoFooter from "./Footers/DemoFooter";
 
 
 
@@ -26,7 +28,7 @@ import {Formik} from 'formik';
         
     const [values,setValues]=useState({designation: "",image: "",prix: "",quantite: ""});
     
- 
+ console.log(values)
     const navigate =useNavigate();
     const generateError= (error) =>
     {
@@ -35,7 +37,7 @@ import {Formik} from 'formik';
     })
 
     }
-    console.log(values.image);
+   
     const handelSubmit = async (event) =>
     {
       event.preventDefault();
@@ -51,9 +53,9 @@ formData.append('quantite',values.quantite);
 formData.append('im',values.image);
 
 // console.log(values);
-console.log(values.image);
-console.log(values.prix);
-console.log(values);
+// console.log(values.image);
+// console.log(values.prix);
+
 const config = {
     headers:{
         'Content-Type': 'multipart/form-data',
@@ -61,10 +63,11 @@ const config = {
         
     }
 } 
-      await axios.post("http://localhost:5011/api/addProduct",{formData},{withCredentials:true}).then((response)=>{
+      await axios.post("http://localhost:5011/api/addProduct",formData,config,{withCredentials:true}).then((response)=>{
 
         console.log(response)
-  
+        // setValues({designation:"",prix:"",quantite:"",image:""})
+        navigate('/listProduct')
     
       }).catch((err=>{console.log('err');
       
@@ -79,7 +82,7 @@ const config = {
   return (
 
     <div>
-        <Header/>    <div  style={{marginTop:"200px",paddingBottom:"200px",display:"flex",flexDirection:"row",justifyContent:"center",heigth:"1400px"}}>
+        <Header/>    <div  style={{marginTop:"80px",paddingBottom:"200px",display:"flex",flexDirection:"row",justifyContent:"center",heigth:"1400px"}}>
     
     <form  onSubmit={(e)=>handelSubmit(e)}>
         <div>
@@ -98,18 +101,18 @@ const config = {
           alignItems={'center'}
         >
           <Grid item xs={12}>
-            <TextField style={{width:"390px"}} label="DESIGNATION" name="designation" onChange= {(e)=>setValues({...values,[e.target.name]:e.target.value})}></TextField>
+            <TextField style={{width:"390px"}} label="DESIGNATION" type="text" name="designation" onChange= {(e)=>setValues({...values,[e.target.name]:e.target.value})}></TextField>
           </Grid>
           <Grid item xs={12}>
           </Grid>
           <Grid item xs={12}>
-            <TextField style={{width:"390px"}} label="PRIX"  name="prix" onChange= {(e)=>setValues({...values,[e.target.name]:e.target.value})}></TextField>
+            <TextField style={{width:"390px"}} inputProps={{min:0}} label="PRIX"  type="number" name="prix" onChange= {(e)=>setValues({...values,[e.target.name]:e.target.value})}></TextField>
           </Grid>
           <Grid item xs={12}>
-            <TextField style={{width:"390px"}} label="QUANTITÉ"  name="quantite" onChange= {(e)=>setValues({...values,[e.target.name]:e.target.value})}></TextField>
+            <TextField style={{width:"390px"}} inputProps={{min:0}} label="QUANTITÉ" type="number"  name="quantite" onChange= {(e)=>setValues({...values,[e.target.name]:e.target.value})}></TextField>
           </Grid>
           <Grid item xs={12}>
-            <TextField style={{width:"390px"}} label="IMAGE"  name="im" type="file" onChange= {(e)=>setValues({...values,image:e.target.value})}></TextField>
+            <TextField style={{width:"390px"}} label="IMAGE"  name="im" type="file" onChange= {(e)=>setValues({...values,image:e.target.files[0]})} ></TextField>
           </Grid>          <Grid item xs={12}>
       
           </Grid>
@@ -124,7 +127,10 @@ const config = {
     
     </form>
    
-    </div></div>
+    </div>
+    
+    <DemoFooter/>
+    </div>
 
 
   )
