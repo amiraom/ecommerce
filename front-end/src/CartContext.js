@@ -1,7 +1,7 @@
 import React, { useState, createContext } from 'react';
 
 export const CartContext = createContext();
-const STORAGE_ITEM = '';
+const STORAGE_ITEM = 'ecommerce';
 
 export const CartProvider = ({ children }) => {
   const initialItems = JSON.parse(localStorage.getItem(STORAGE_ITEM)) || [];
@@ -24,7 +24,7 @@ export const CartProvider = ({ children }) => {
 
   const addToCart = product => {
     const { items = [] } = cart;
-    const productIndex = items.findIndex(item => item.id === product.id);
+    const productIndex = items.findIndex(item => item.id === product._id);
     if (productIndex === -1) {
       items.push({
         ...product,

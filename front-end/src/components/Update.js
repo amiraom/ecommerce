@@ -4,6 +4,8 @@ import { useSelector } from 'react-redux';
 import { setUser } from '../store/authSlice';
 import { useParams } from 'react-router-dom';
 import { useNavigate} from 'react-router-dom';
+import Header from './Header';
+import DemoFooter from './Footers/DemoFooter';
 
 const Update = () => {
 const {id} = useParams()
@@ -27,6 +29,8 @@ const handelUpdate = async () =>
 }
   return (
     <div>
+       <Header/>
+<div style={{marginLeft:"400px",marginTop:"50px"}}>
 <h1>Update Page</h1>
 <label>Prenom</label>
 <input type="text" name="name" onChange={(e)=>setValue({...value,[e.target.name]:e.target.value})}/>
@@ -40,7 +44,9 @@ const handelUpdate = async () =>
 <br/>
 <label>Mot de passe</label>
 <input type="text" name="password" onChange={(e)=>setValue({...value,[e.target.name]:e.target.value})}/>
+<br/>
 <button onClick={()=>handelUpdate()}>Send</button>
+</div>
     </div>
   )
 }

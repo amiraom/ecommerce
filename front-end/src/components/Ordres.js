@@ -61,53 +61,60 @@ const Ordres = () => {
       <thead>
         <tr>
         
-          <th>UserName</th>
-          <th>Name product</th>
-          <th>Quantity</th>
+          <th>Produit</th>
+          <th>Date</th>
+          <th>Totale</th>
+          <th>adresse de livraison</th>
+          <th>mode de paiement</th>
           
         </tr>
       </thead>
       <tbody>
       {list.map((elem) => (<tr>
-        <td>{elem.orderItems[0].price}</td>
-
-        <td>{elem.createdAt
-} 
+        {/* <td>{elem.orderItems[0].price}</td> */}
+<td>{elem.orderItems.map((item) => (
+    <div> <span>{item.name}</span>
+    <ul style={{listStyle:"none"}}>
+        <li>
+<p>{item.qty}</p>
+        </li>
+        <li>
+<p>{item.price} TND</p>
+        </li>
+    </ul>
+   </div>
+   
+    ))}
+    </td>
+        <td>{elem.createdAt} 
 
         </td>
-        <td>{elem.isPaid} 
+        {/* <td>{elem.isPaid} 
 
-</td>
+</td> */}
         <td>{elem.totalPrice}</td>
+        <td>{elem.shippingAddress.postalCode}</td>
+        {/* <td>{elem.shippingAddress.map((item) => (
+    <div> <span>{item.address}</span>
+    <ul style={{listStyle:"none"}}>
+        <li>
+<p>{item.city}</p>
+        </li>
+        <li>
+<p>{item.postalCode} </p>
+        </li>
+        <li>
+<p>{item.country} </p>
+        </li>
+    </ul>
+   </div>
+   
+    ))}
+    </td> */}
         <td>{elem.paymentMethod}</td>
 
         
-        
-        {/* <td>  <Button
-                  className="btn-round mr-1"
-                  color="warning"
-                  outline
-                  type="button" onClick={()=>navigate(`/update/${elem._id}`)}
-                >Modifier
-                  </Button>
 
-                  <Link to={{
-                    pathname:'/update',
-                    state:{ elem }
-                  }}></Link>
-                  </td> */}
-        {/* <td>
-
-        <Button
-                  color="danger"
-                  outline
-                  size="sm"
-                  type="button"
-                  className="mr-1" onClick={()=>deleteUser(elem._id)}
-                >
-                 Supprimer
-                </Button>
-          </td> */}
          </tr>
             ))}
       </tbody>
